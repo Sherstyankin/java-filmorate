@@ -36,7 +36,7 @@ public class ValidationService {
         if (id == null) {
             throw new ValidationException("id не может быть null.");
         }
-        if (!userStorage.getUsers().containsKey(id)) {
+        if (!userStorage.isUserExist(id)) {
             throw new UserNotFoundException("Пользователь c ID: " + id + " не существует!");
         }
     }
