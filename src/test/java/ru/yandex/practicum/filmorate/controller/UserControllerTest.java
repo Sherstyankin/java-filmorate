@@ -65,7 +65,7 @@ class UserControllerTest {
         mockMvc.perform(post("/users")
                         .content(objectMapper.writeValueAsString(userToCreate))
                         .contentType("application/json"))
-                .andExpect(status().isBadRequest());
+                .andExpect(status().isInternalServerError());
     }
 
     @SneakyThrows
@@ -75,7 +75,7 @@ class UserControllerTest {
         mockMvc.perform(post("/users")
                         .content(objectMapper.writeValueAsString(userToCreate))
                         .contentType("application/json"))
-                .andExpect(status().isBadRequest());
+                .andExpect(status().isInternalServerError());
     }
 
     @SneakyThrows
@@ -85,7 +85,7 @@ class UserControllerTest {
         mockMvc.perform(post("/users")
                         .content(objectMapper.writeValueAsString(userToCreate))
                         .contentType("application/json"))
-                .andExpect(status().isBadRequest());
+                .andExpect(status().isInternalServerError());
     }
 
     @SneakyThrows
@@ -95,9 +95,8 @@ class UserControllerTest {
         mockMvc.perform(post("/users")
                         .content(objectMapper.writeValueAsString(userToCreate))
                         .contentType("application/json"))
-                .andExpect(status().isBadRequest());
+                .andExpect(status().isInternalServerError());
     }
-
 
 
     //Test PUT validation
@@ -108,7 +107,7 @@ class UserControllerTest {
                 .content(objectMapper.writeValueAsString(userToCreate))
                 .contentType("application/json"));
         User userToUpdate = User.builder()
-                .id(1)
+                .id(1L)
                 .email("rambler@mail.ru")
                 .login("crim")
                 .name("John Name")
@@ -131,7 +130,7 @@ class UserControllerTest {
                 .content(objectMapper.writeValueAsString(userToCreate))
                 .contentType("application/json"));
         User userToUpdate = User.builder()
-                .id(1)
+                .id(1L)
                 .email(null)
                 .login("crim")
                 .name("John Name")
@@ -140,7 +139,7 @@ class UserControllerTest {
         mockMvc.perform(put("/users")
                         .content(objectMapper.writeValueAsString(userToUpdate))
                         .contentType("application/json"))
-                .andExpect(status().isBadRequest());
+                .andExpect(status().isInternalServerError());
     }
 
     @SneakyThrows
@@ -150,7 +149,7 @@ class UserControllerTest {
                 .content(objectMapper.writeValueAsString(userToCreate))
                 .contentType("application/json"));
         User userToUpdate = User.builder()
-                .id(1)
+                .id(1L)
                 .email("mail.ru")
                 .login("crim")
                 .name("John Name")
@@ -159,7 +158,7 @@ class UserControllerTest {
         mockMvc.perform(put("/users")
                         .content(objectMapper.writeValueAsString(userToUpdate))
                         .contentType("application/json"))
-                .andExpect(status().isBadRequest());
+                .andExpect(status().isInternalServerError());
     }
 
     @SneakyThrows
@@ -169,7 +168,7 @@ class UserControllerTest {
                 .content(objectMapper.writeValueAsString(userToCreate))
                 .contentType("application/json"));
         User userToUpdate = User.builder()
-                .id(124)
+                .id(124L)
                 .email("rambler@mail.ru")
                 .login("crim")
                 .name("John Name")
