@@ -54,7 +54,7 @@ class FilmControllerTest {
         mockMvc.perform(post("/films")
                         .content(objectMapper.writeValueAsString(filmToCreate))
                         .contentType("application/json"))
-                .andExpect(status().isInternalServerError());
+                .andExpect(status().isBadRequest());
     }
 
     @SneakyThrows
@@ -67,7 +67,7 @@ class FilmControllerTest {
         mockMvc.perform(post("/films")
                         .content(objectMapper.writeValueAsString(filmToCreate))
                         .contentType("application/json"))
-                .andExpect(status().isInternalServerError());
+                .andExpect(status().isBadRequest());
     }
 
     @SneakyThrows
@@ -87,7 +87,7 @@ class FilmControllerTest {
         mockMvc.perform(post("/films")
                         .content(objectMapper.writeValueAsString(filmToCreate))
                         .contentType("application/json"))
-                .andExpect(status().isInternalServerError());
+                .andExpect(status().isBadRequest());
     }
 
 
@@ -131,7 +131,7 @@ class FilmControllerTest {
         mockMvc.perform(put("/films")
                         .content(objectMapper.writeValueAsString(filmToUpdate))
                         .contentType("application/json"))
-                .andExpect(status().isInternalServerError());
+                .andExpect(status().isBadRequest());
     }
 
     @SneakyThrows
@@ -153,7 +153,7 @@ class FilmControllerTest {
         mockMvc.perform(put("/films")
                         .content(objectMapper.writeValueAsString(filmToUpdate))
                         .contentType("application/json"))
-                .andExpect(status().isInternalServerError());
+                .andExpect(status().isBadRequest());
     }
 
     @SneakyThrows
@@ -191,6 +191,6 @@ class FilmControllerTest {
         mockMvc.perform(put("/films")
                         .content(objectMapper.writeValueAsString(filmToUpdate))
                         .contentType("application/json"))
-                .andExpect(status().isInternalServerError());
+                .andExpect(status().isBadRequest());
     }
 }

@@ -65,7 +65,7 @@ class UserControllerTest {
         mockMvc.perform(post("/users")
                         .content(objectMapper.writeValueAsString(userToCreate))
                         .contentType("application/json"))
-                .andExpect(status().isInternalServerError());
+                .andExpect(status().isBadRequest());
     }
 
     @SneakyThrows
@@ -75,7 +75,7 @@ class UserControllerTest {
         mockMvc.perform(post("/users")
                         .content(objectMapper.writeValueAsString(userToCreate))
                         .contentType("application/json"))
-                .andExpect(status().isInternalServerError());
+                .andExpect(status().isBadRequest());
     }
 
     @SneakyThrows
@@ -85,7 +85,7 @@ class UserControllerTest {
         mockMvc.perform(post("/users")
                         .content(objectMapper.writeValueAsString(userToCreate))
                         .contentType("application/json"))
-                .andExpect(status().isInternalServerError());
+                .andExpect(status().isBadRequest());
     }
 
     @SneakyThrows
@@ -95,7 +95,7 @@ class UserControllerTest {
         mockMvc.perform(post("/users")
                         .content(objectMapper.writeValueAsString(userToCreate))
                         .contentType("application/json"))
-                .andExpect(status().isInternalServerError());
+                .andExpect(status().isBadRequest());
     }
 
 
@@ -139,7 +139,7 @@ class UserControllerTest {
         mockMvc.perform(put("/users")
                         .content(objectMapper.writeValueAsString(userToUpdate))
                         .contentType("application/json"))
-                .andExpect(status().isInternalServerError());
+                .andExpect(status().isBadRequest());
     }
 
     @SneakyThrows
@@ -158,7 +158,7 @@ class UserControllerTest {
         mockMvc.perform(put("/users")
                         .content(objectMapper.writeValueAsString(userToUpdate))
                         .contentType("application/json"))
-                .andExpect(status().isInternalServerError());
+                .andExpect(status().isBadRequest());
     }
 
     @SneakyThrows
