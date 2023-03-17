@@ -99,7 +99,6 @@ class UserControllerTest {
     }
 
 
-
     //Test PUT validation
     @SneakyThrows
     @Test
@@ -108,7 +107,7 @@ class UserControllerTest {
                 .content(objectMapper.writeValueAsString(userToCreate))
                 .contentType("application/json"));
         User userToUpdate = User.builder()
-                .id(1)
+                .id(1L)
                 .email("rambler@mail.ru")
                 .login("crim")
                 .name("John Name")
@@ -131,7 +130,7 @@ class UserControllerTest {
                 .content(objectMapper.writeValueAsString(userToCreate))
                 .contentType("application/json"));
         User userToUpdate = User.builder()
-                .id(1)
+                .id(1L)
                 .email(null)
                 .login("crim")
                 .name("John Name")
@@ -150,7 +149,7 @@ class UserControllerTest {
                 .content(objectMapper.writeValueAsString(userToCreate))
                 .contentType("application/json"));
         User userToUpdate = User.builder()
-                .id(1)
+                .id(1L)
                 .email("mail.ru")
                 .login("crim")
                 .name("John Name")
@@ -169,7 +168,7 @@ class UserControllerTest {
                 .content(objectMapper.writeValueAsString(userToCreate))
                 .contentType("application/json"));
         User userToUpdate = User.builder()
-                .id(124)
+                .id(124L)
                 .email("rambler@mail.ru")
                 .login("crim")
                 .name("John Name")

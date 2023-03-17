@@ -32,7 +32,7 @@ class FilmControllerTest {
         filmToCreate = Film.builder()
                 .name("Titanic")
                 .description("Description")
-                .duration(180)
+                .duration(180L)
                 .releaseDate(LocalDate.of(1997, 2, 2))
                 .build();
     }
@@ -83,7 +83,7 @@ class FilmControllerTest {
     @SneakyThrows
     @Test
     void whenFilmDurationNegativeThenReturnsBadRequestInPost() {
-        filmToCreate.setDuration(-1);
+        filmToCreate.setDuration(-1L);
         mockMvc.perform(post("/films")
                         .content(objectMapper.writeValueAsString(filmToCreate))
                         .contentType("application/json"))
@@ -99,10 +99,10 @@ class FilmControllerTest {
                 .content(objectMapper.writeValueAsString(filmToCreate))
                 .contentType("application/json"));
         Film filmToUpdate = Film.builder()
-                .id(1)
+                .id(1L)
                 .name("007")
                 .description("Description")
-                .duration(180)
+                .duration(180L)
                 .releaseDate(LocalDate.of(1997, 2, 2))
                 .build();
         String response = mockMvc.perform(put("/films")
@@ -122,10 +122,10 @@ class FilmControllerTest {
                 .content(objectMapper.writeValueAsString(filmToCreate))
                 .contentType("application/json"));
         Film filmToUpdate = Film.builder()
-                .id(1)
+                .id(1L)
                 .name(null)
                 .description("Description")
-                .duration(180)
+                .duration(180L)
                 .releaseDate(LocalDate.of(1997, 2, 2))
                 .build();
         mockMvc.perform(put("/films")
@@ -141,13 +141,13 @@ class FilmControllerTest {
                 .content(objectMapper.writeValueAsString(filmToCreate))
                 .contentType("application/json"));
         Film filmToUpdate = Film.builder()
-                .id(1)
+                .id(1L)
                 .name("Titanic")
                 .description("Descriptionnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn" +
                         "nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn" +
                         "nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn" +
                         "nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn")
-                .duration(180)
+                .duration(180L)
                 .releaseDate(LocalDate.of(1997, 2, 2))
                 .build();
         mockMvc.perform(put("/films")
@@ -163,10 +163,10 @@ class FilmControllerTest {
                 .content(objectMapper.writeValueAsString(filmToCreate))
                 .contentType("application/json"));
         Film filmToUpdate = Film.builder()
-                .id(1)
+                .id(1L)
                 .name("Titanic")
                 .description("Description")
-                .duration(180)
+                .duration(180L)
                 .releaseDate(LocalDate.of(1700, 2, 2))
                 .build();
         mockMvc.perform(put("/films")
@@ -182,10 +182,10 @@ class FilmControllerTest {
                 .content(objectMapper.writeValueAsString(filmToCreate))
                 .contentType("application/json"));
         Film filmToUpdate = Film.builder()
-                .id(1)
+                .id(1L)
                 .name("Titanic")
                 .description("Description")
-                .duration(-1)
+                .duration(-1L)
                 .releaseDate(LocalDate.of(1700, 2, 2))
                 .build();
         mockMvc.perform(put("/films")
