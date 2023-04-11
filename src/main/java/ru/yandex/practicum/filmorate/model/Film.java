@@ -21,7 +21,7 @@ public class Film {
     private LocalDate releaseDate;
     @Positive
     private Long duration;
-    private final Set<Long> likes = new HashSet<>();
-    private Set<String> genre;
+    private final Set<Long> likes = new HashSet<>(); //хранение перести в БД
+    private final Set<String> genre = new HashSet<>(); //хранение перести в БД
     private String mpa; // возрастное ограничение
 }

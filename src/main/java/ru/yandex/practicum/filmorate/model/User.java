@@ -21,7 +21,5 @@ public class User {
     private String name;
     @Past
     private LocalDate birthday;
-    private final Set<Long> friendsId = new HashSet<>();
-
-    private Boolean friendStatus; // статус дружбы (подтверждена - true, нет - false)
+    private final Set<Long> friendsId = new HashSet<>(); //хранение перести в БД
 }
