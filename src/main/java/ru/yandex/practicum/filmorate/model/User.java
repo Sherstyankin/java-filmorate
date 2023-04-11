@@ -22,4 +22,6 @@ public class User {
     @Past
     private LocalDate birthday;
     private final Set<Long> friendsId = new HashSet<>();
+
+    private Boolean friendStatus; // статус дружбы (подтверждена - true, нет - false)
 }

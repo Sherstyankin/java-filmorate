@@ -22,4 +22,6 @@ public class Film {
     @Positive
     private Long duration;
     private final Set<Long> likes = new HashSet<>();
+    private Set<String> genre;
+    private String mpa; // возрастное ограничение
 }
