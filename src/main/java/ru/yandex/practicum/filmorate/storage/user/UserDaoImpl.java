@@ -99,8 +99,8 @@ public class UserDaoImpl implements UserDao {
         String sqlQuery = "SELECT friendship_from " +
                 "FROM FRIENDSHIP " +
                 "WHERE friendship_to = ?";
-        return jdbcTemplate.query(sqlQuery
-                        , (rs, rowNum) -> rs.getLong("friendship_from"), userId)
+        return jdbcTemplate.query(sqlQuery,
+                        (rs, rowNum) -> rs.getLong("friendship_from"), userId)
                 .stream()
                 .map(this::findUserById)
                 .collect(Collectors.toList());
