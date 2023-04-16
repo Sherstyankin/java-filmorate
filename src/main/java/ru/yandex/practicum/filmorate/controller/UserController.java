@@ -27,8 +27,7 @@ public class UserController {
         //Валидация
         validationService.validateUser(user);
         //Добавление пользователя
-        userService.save(user);
-        return user;
+        return userService.save(user);
     }
 
     @PutMapping
@@ -36,8 +35,7 @@ public class UserController {
         //Валидация
         validationService.validateUser(user);
         //Обновление пользователя
-        userService.update(user);
-        return user;
+        return userService.update(user);
     }
 
     @GetMapping("/{id}") //получение юзера по id
