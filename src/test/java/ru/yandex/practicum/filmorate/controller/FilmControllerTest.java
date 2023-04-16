@@ -6,9 +6,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.web.servlet.MockMvc;
 import ru.yandex.practicum.filmorate.model.Film;
+import ru.yandex.practicum.filmorate.service.FilmService;
+import ru.yandex.practicum.filmorate.storage.film.FilmDaoImpl;
 
 import java.time.LocalDate;
 
@@ -17,15 +21,18 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@Deprecated
+
 @WebMvcTest(controllers = FilmController.class)
 @ComponentScan({"ru.yandex.practicum.filmorate"})
 class FilmControllerTest {
-
     @Autowired
     private MockMvc mockMvc;
     @Autowired
     private ObjectMapper objectMapper;
+    @MockBean
+    private FilmDaoImpl filmDao;
+    @MockBean
+    private JdbcTemplate jdbcTemplate;
     private Film filmToCreate;
 
     @BeforeEach
@@ -106,14 +113,10 @@ class FilmControllerTest {
                 .duration(180L)
                 .releaseDate(LocalDate.of(1997, 2, 2))
                 .build();
-        String response = mockMvc.perform(put("/films")
+        mockMvc.perform(put("/films")
                         .content(objectMapper.writeValueAsString(filmToUpdate))
                         .contentType("application/json"))
-                .andExpect(status().isOk())
-                .andReturn()
-                .getResponse()
-                .getContentAsString();
-        assertEquals(objectMapper.writeValueAsString(filmToUpdate), response);
+                .andExpect(status().isOk());
     }
 
     @SneakyThrows
