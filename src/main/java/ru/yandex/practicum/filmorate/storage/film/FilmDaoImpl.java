@@ -56,13 +56,13 @@ public class FilmDaoImpl implements FilmDao {
         String sqlQuery = "update films set " +
                 "name = ?, description = ?, release_date = ?, duration = ?, mpa_id = ?" +
                 "where id = ?";
-        jdbcTemplate.update(sqlQuery
-                , film.getName()
-                , film.getDescription()
-                , Date.valueOf(film.getReleaseDate())
-                , film.getDuration()
-                , film.getMpa().getId()
-                , film.getId());
+        jdbcTemplate.update(sqlQuery,
+                film.getName(),
+                film.getDescription(),
+                Date.valueOf(film.getReleaseDate()),
+                film.getDuration(),
+                film.getMpa().getId(),
+                film.getId());
         deleteFilmGenres(film); // удаляем прежние жанры фильма
         saveFilmGenres(film, film.getId()); // сохраняем новые жанры
         return findFilmById(film.getId());

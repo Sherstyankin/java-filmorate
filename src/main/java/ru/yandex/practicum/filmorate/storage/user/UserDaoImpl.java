@@ -71,12 +71,12 @@ public class UserDaoImpl implements UserDao {
         String sqlQuery = "update users set " +
                 "email = ?, login = ?, name = ?, birthday = ? " +
                 "where id = ?";
-        jdbcTemplate.update(sqlQuery
-                , user.getEmail()
-                , user.getLogin()
-                , user.getName()
-                , Date.valueOf(user.getBirthday())
-                , user.getId());
+        jdbcTemplate.update(sqlQuery,
+                user.getEmail(),
+                user.getLogin(),
+                user.getName(),
+                Date.valueOf(user.getBirthday()),
+                user.getId());
         return findUserById(user.getId());
     }
 
@@ -111,10 +111,10 @@ public class UserDaoImpl implements UserDao {
         String sqlQuery = "SELECT friendship_from " +
                 "FROM FRIENDSHIP " +
                 "WHERE friendship_to = ?";
-        List<Long> friendsIdOfUser1 = jdbcTemplate.query(sqlQuery
-                , (rs, rowNum) -> rs.getLong("friendship_from"), userId);
-        List<Long> friendsIdOfUser2 = jdbcTemplate.query(sqlQuery
-                , (rs, rowNum) -> rs.getLong("friendship_from"), otherId);
+        List<Long> friendsIdOfUser1 = jdbcTemplate.query(sqlQuery,
+                (rs, rowNum) -> rs.getLong("friendship_from"), userId);
+        List<Long> friendsIdOfUser2 = jdbcTemplate.query(sqlQuery,
+                (rs, rowNum) -> rs.getLong("friendship_from"), otherId);
         List<Long> commonFriendsId = new ArrayList<>(friendsIdOfUser1);
         commonFriendsId.retainAll(friendsIdOfUser2);//в commonFriendsId остаются только общие id друзей
         return commonFriendsId;
