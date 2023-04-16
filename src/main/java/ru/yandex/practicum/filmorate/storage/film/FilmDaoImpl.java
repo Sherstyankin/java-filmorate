@@ -168,9 +168,9 @@ public class FilmDaoImpl implements FilmDao {
         String sqlQuery = "insert into film_genres (genre_id, film_id) " +
                 "values (?, ?)";
         for (Genre genre : film.getGenres()) {
-            jdbcTemplate.update(sqlQuery
-                    , genre.getId()
-                    , filmId);
+            jdbcTemplate.update(sqlQuery,
+                    genre.getId(),
+                    filmId);
         }
     }
 
