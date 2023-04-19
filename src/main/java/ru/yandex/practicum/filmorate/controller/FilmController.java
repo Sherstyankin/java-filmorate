@@ -1,7 +1,10 @@
 package ru.yandex.practicum.filmorate.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import ru.yandex.practicum.filmorate.dto.FilmDto;
 import ru.yandex.practicum.filmorate.model.Film;
 import ru.yandex.practicum.filmorate.model.Genre;
 import ru.yandex.practicum.filmorate.model.MPA;
@@ -9,64 +12,68 @@ import ru.yandex.practicum.filmorate.service.FilmService;
 import ru.yandex.practicum.filmorate.service.ValidationService;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @RestController
+@Validated
 @RequestMapping
 @RequiredArgsConstructor
 public class FilmController {
     private final ValidationService validationService;
     private final FilmService filmService;
+    private final ModelMapper modelMapper;
 
     @GetMapping("/films")
-    public Collection<Film> getAllFilms() {
-        return filmService.getAllFilms();
+    public List<FilmDto> getAllFilms() {
+        return filmService.getAllFilms().stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
     }
 
     @PostMapping("/films")
-    public Film createFilm(@Valid @RequestBody Film film) {
+    public FilmDto createFilm(@Valid @RequestBody Film film) {
         //Валидация
         validationService.validateFilm(film);
         //Добавление фильма
-        return filmService.save(film);
+        return convertToDto(filmService.save(film));
     }
 
     @PutMapping("/films")
-    public Film updateFilm(@Valid @RequestBody Film film) {
+    public FilmDto updateFilm(@Valid @RequestBody Film film) {
         //Валидация
         validationService.validateFilm(film);
         //Обновляем фильм в базе
-        return filmService.update(film);
+        return convertToDto(filmService.update(film));
     }
 
     @GetMapping("/films/{id}") //получение фильма по id
-    public Film findFilmById(@PathVariable(value = "id") Long filmId) {
-        validationService.validateId(filmId);
-        return filmService.findFilmById(filmId);
+    public FilmDto findFilmById(@NotNull @PathVariable(value = "id") Long filmId) {
+        return convertToDto(filmService.findFilmById(filmId));
     }
 
     @PutMapping("/films/{id}/like/{userId}")
-    public void addLike(@PathVariable(value = "id") Long filmId,
-                        @PathVariable Long userId) {
-        validationService.validateId(filmId);
-        validationService.validateId(userId);
+    public void addLike(@NotNull @PathVariable(value = "id") Long filmId,
+                        @NotNull @PathVariable Long userId) {
         filmService.addLike(filmId, userId);
     }
 
     @DeleteMapping("/films/{id}/like/{userId}")
-    public void deleteLike(@PathVariable(value = "id") Long filmId,
-                           @PathVariable Long userId) {
-        validationService.validateId(filmId);
-        validationService.validateId(userId);
+    public void deleteLike(@NotNull @PathVariable(value = "id") Long filmId,
+                           @NotNull @PathVariable Long userId) {
         filmService.deleteLike(filmId, userId);
     }
 
     @GetMapping("/films/popular")
-    public List<Film> getMostPopularFilms(@RequestParam(defaultValue = "10", required = false) Long count) {
-        validationService.validateCount(count);
-        return filmService.getMostPopularFilms(count);
+    public List<FilmDto> getMostPopularFilms(@Positive @RequestParam(defaultValue = "10",
+            required = false) Long count) {
+        return filmService.getMostPopularFilms(count).stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/genres") //получение списка всех жанром
@@ -75,8 +82,7 @@ public class FilmController {
     }
 
     @GetMapping("/genres/{id}") //получение жанра по id
-    public Genre findGenreById(@PathVariable(value = "id") Long genreId) {
-        validationService.validateId(genreId);
+    public Genre findGenreById(@NotNull @PathVariable(value = "id") Long genreId) {
         return filmService.findGenreById(genreId);
     }
 
@@ -87,7 +93,11 @@ public class FilmController {
 
 
     @GetMapping("/mpa/{id}") //получение mpa по id
-    public MPA findMPAById(@PathVariable(value = "id") Long mpaId) {
+    public MPA findMPAById(@NotNull @PathVariable(value = "id") Long mpaId) {
         return filmService.findMPAById(mpaId);
+    }
+
+    private FilmDto convertToDto(Film film) {
+        return modelMapper.map(film, FilmDto.class);
     }
 }

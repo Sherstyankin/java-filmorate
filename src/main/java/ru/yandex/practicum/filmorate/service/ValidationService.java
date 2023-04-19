@@ -3,7 +3,6 @@ package ru.yandex.practicum.filmorate.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import ru.yandex.practicum.filmorate.exeption.ValidationException;
 import ru.yandex.practicum.filmorate.exeption.film.InvalidReleaseDayException;
 import ru.yandex.practicum.filmorate.model.Film;
 import ru.yandex.practicum.filmorate.model.User;
@@ -26,18 +25,6 @@ public class ValidationService {
         if (film.getReleaseDate().isBefore(LocalDate.of(1895, 12, 28))) {
             throw new InvalidReleaseDayException("Дата релиза фильма " + film.getReleaseDate() +
                     " указана некорректно.");
-        }
-    }
-
-    public void validateId(Long id) {
-        if (id == null) {
-            throw new ValidationException("id не может быть null.");
-        }
-    }
-
-    public void validateCount(Long count) {
-        if (count <= 0) {
-            throw new ValidationException("Количество не может быть отрицательным.");
         }
     }
 }

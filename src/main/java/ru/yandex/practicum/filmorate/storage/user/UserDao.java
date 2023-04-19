@@ -14,9 +14,9 @@ public interface UserDao {
 
     User update(User user);
 
-    void addFriend(Long userId, Long friendId);
+    boolean addFriend(Long userId, Long friendId);
 
-    void deleteFriend(Long userId, Long friendId);
+    boolean deleteFriend(Long userId, Long friendId);
 
     List<User> findAllUserFriends(Long userId);
 

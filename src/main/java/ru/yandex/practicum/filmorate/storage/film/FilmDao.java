@@ -27,7 +27,7 @@ public interface FilmDao {
 
     List<Film> findMostPopularFilms(Long count);
 
-    void addLike(Long filmId, Long userId);
+    boolean addLike(Long filmId, Long userId);
 
-    void deleteLike(Long filmId, Long userId);
+    boolean deleteLike(Long filmId, Long userId);
 }

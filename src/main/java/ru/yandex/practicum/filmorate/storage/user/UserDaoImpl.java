@@ -81,17 +81,17 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void addFriend(Long userId, Long friendId) {
+    public boolean addFriend(Long userId, Long friendId) {
         String sqlQuery = "insert into friendship (friendship_from, friendship_to) " +
                 "values (?, ?)";
-        jdbcTemplate.update(sqlQuery, friendId, userId); // у юзера(userId) будет друг(friendId)
+        return jdbcTemplate.update(sqlQuery, friendId, userId) > 0; // у юзера(userId) будет друг(friendId)
     }
 
     @Override
-    public void deleteFriend(Long userId, Long friendId) {
+    public boolean deleteFriend(Long userId, Long friendId) {
         String sqlQuery = "delete from friendship " +
                 "where friendship_from = ? and friendship_to = ?";
-        jdbcTemplate.update(sqlQuery, friendId, userId);
+        return jdbcTemplate.update(sqlQuery, friendId, userId) > 0;
     }
 
     @Override

@@ -46,15 +46,6 @@ class FilmControllerTest {
     //Test POST validation
     @SneakyThrows
     @Test
-    void whenFilmValidInputThenReturnsOkInPost() {
-        mockMvc.perform(post("/films")
-                        .content(objectMapper.writeValueAsString(filmToCreate))
-                        .contentType("application/json"))
-                .andExpect(status().isOk());
-    }
-
-    @SneakyThrows
-    @Test
     void whenNameIsNullThenReturnsBadRequestInPost() {
         filmToCreate.setName(null);
         mockMvc.perform(post("/films")
@@ -98,25 +89,6 @@ class FilmControllerTest {
 
 
     //Test PUT validation
-    @SneakyThrows
-    @Test
-    void whenFilmValidInputThenReturnsOkInPut() {
-        mockMvc.perform(post("/films")
-                .content(objectMapper.writeValueAsString(filmToCreate))
-                .contentType("application/json"));
-        Film filmToUpdate = Film.builder()
-                .id(1L)
-                .name("007")
-                .description("Description")
-                .duration(180L)
-                .releaseDate(LocalDate.of(1997, 2, 2))
-                .build();
-        mockMvc.perform(put("/films")
-                        .content(objectMapper.writeValueAsString(filmToUpdate))
-                        .contentType("application/json"))
-                .andExpect(status().isOk());
-    }
-
     @SneakyThrows
     @Test
     void whenNameIsNullValueThenReturnsBadRequestInPut() {

@@ -21,6 +21,6 @@ public class Film {
     @Positive
     private Long duration;
     //хранение лайков теперь только в БД
-    private Set<Genre> genres;
-    private MPA mpa; // возрастное ограничение (рейтинг)
+    private final Set<Genre> genres;
+    private final MPA mpa; // возрастное ограничение (рейтинг)
 }

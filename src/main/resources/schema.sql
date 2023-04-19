@@ -1,12 +1,12 @@
 CREATE TABLE IF NOT EXISTS mpa (
 	id bigserial NOT NULL,
-	name varchar(255),
+	name varchar(100),
 	CONSTRAINT mpa_pk PRIMARY KEY (id)
 );
 
 CREATE TABLE IF NOT EXISTS films (
 	id bigserial NOT NULL,
-	name varchar(255) NOT NULL,
+	name varchar(100) NOT NULL,
 	description varchar(200) NOT NULL,
 	release_date date NOT NULL,
 	duration long,
@@ -18,9 +18,9 @@ CREATE TABLE IF NOT EXISTS films (
 
 CREATE TABLE IF NOT EXISTS users (
 	id bigserial NOT NULL,
-	email varchar(255) NOT NULL,
-	login varchar(255) NOT NULL,
-	name varchar(255) NOT NULL,
+	email varchar(50) NOT NULL,
+	login varchar(50) NOT NULL,
+	name varchar(100) NOT NULL,
 	birthday date NOT NULL,
 	CONSTRAINT users_pk PRIMARY KEY (id),
 	CONSTRAINT users_uc UNIQUE (email, login)

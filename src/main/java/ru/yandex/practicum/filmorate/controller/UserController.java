@@ -7,6 +7,7 @@ import ru.yandex.practicum.filmorate.service.UserService;
 import ru.yandex.practicum.filmorate.service.ValidationService;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.Collection;
 import java.util.List;
 
@@ -39,38 +40,30 @@ public class UserController {
     }
 
     @GetMapping("/{id}") //получение юзера по id
-    public User findUserById(@PathVariable(value = "id") Long userId) {
-        validationService.validateId(userId);
+    public User findUserById(@NotNull @PathVariable(value = "id") Long userId) {
         return userService.findUserById(userId);
     }
 
     @PutMapping("/{id}/friends/{friendId}") //добавление в друзья
-    public void addTofriends(@PathVariable(value = "id") Long userId,
-                             @PathVariable Long friendId) {
-        validationService.validateId(userId);
-        validationService.validateId(friendId);
+    public void addTofriends(@NotNull @PathVariable(value = "id") Long userId,
+                             @NotNull @PathVariable Long friendId) {
         userService.addFriend(userId, friendId);
     }
 
     @DeleteMapping("/{id}/friends/{friendId}") //удаление из друзей
-    public void deleteFromFriends(@PathVariable(value = "id") Long userId,
-                                  @PathVariable Long friendId) {
-        validationService.validateId(userId);
-        validationService.validateId(friendId);
+    public void deleteFromFriends(@NotNull @PathVariable(value = "id") Long userId,
+                                  @NotNull @PathVariable Long friendId) {
         userService.deleteFriend(userId, friendId);
     }
 
     @GetMapping("/{id}/friends") //получение всех друзей
-    public List<User> getUserFriends(@PathVariable(value = "id") Long userId) {
-        validationService.validateId(userId);
+    public List<User> getUserFriends(@NotNull @PathVariable(value = "id") Long userId) {
         return userService.getUserFriends(userId);
     }
 
     @GetMapping("/{id}/friends/common/{otherId}") //получение общих друзей
-    public List<User> getCommonFriends(@PathVariable(value = "id") Long userId,
-                                       @PathVariable Long otherId) {
-        validationService.validateId(userId);
-        validationService.validateId(otherId);
+    public List<User> getCommonFriends(@NotNull @PathVariable(value = "id") Long userId,
+                                       @NotNull @PathVariable Long otherId) {
         return userService.getCommonFriends(userId, otherId);
     }
 }

@@ -128,17 +128,17 @@ public class FilmDaoImpl implements FilmDao {
     }
 
     @Override
-    public void addLike(Long filmId, Long userId) {
+    public boolean addLike(Long filmId, Long userId) {
         String sqlQuery = "insert into likes (film_id, user_id) " +
                 "values (?, ?)";
-        jdbcTemplate.update(sqlQuery, filmId, userId);
+        return jdbcTemplate.update(sqlQuery, filmId, userId) > 0; //возврат boolean для тестов
     }
 
     @Override
-    public void deleteLike(Long filmId, Long userId) {
+    public boolean deleteLike(Long filmId, Long userId) {
         String sqlQuery = "delete from likes " +
                 "where film_id = ? and user_id = ?";
-        jdbcTemplate.update(sqlQuery, filmId, userId);
+        return jdbcTemplate.update(sqlQuery, filmId, userId) > 0; //возврат boolean для тестов
     }
 
     @Override
@@ -185,7 +185,6 @@ public class FilmDaoImpl implements FilmDao {
                 "from film_genres " +
                 "where film_id = ?";
         return jdbcTemplate.query(sqlQuery, this::mapToGenreId, filmId).stream()
-                .distinct()
                 .map(this::findGenreById)
                 .collect(Collectors.toCollection(() -> new TreeSet<>(Comparator.comparingLong(Genre::getId))));
     }
