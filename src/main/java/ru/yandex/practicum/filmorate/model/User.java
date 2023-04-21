@@ -5,7 +5,6 @@ import lombok.Data;
 
 import javax.validation.constraints.*;
 import java.time.LocalDate;
-import java.util.HashSet;
 import java.util.Set;
 
 @Data
@@ -21,7 +20,5 @@ public class User {
     private String name;
     @Past
     private LocalDate birthday;
-    private final Set<Long> friendsId = new HashSet<>();
-
-    private Boolean friendStatus; // статус дружбы (подтверждена - true, нет - false)
+    private final Set<Long> friendsId;
 }

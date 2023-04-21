@@ -7,7 +7,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
-import java.util.HashSet;
 import java.util.Set;
 
 @Data
@@ -21,7 +20,7 @@ public class Film {
     private LocalDate releaseDate;
     @Positive
     private Long duration;
-    private final Set<Long> likes = new HashSet<>();
-    private Set<String> genre;
-    private String mpa; // возрастное ограничение
+    //хранение лайков теперь только в БД
+    private final Set<Genre> genres;
+    private final MPA mpa; // возрастное ограничение (рейтинг)
 }
